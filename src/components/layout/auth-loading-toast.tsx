@@ -1,14 +1,12 @@
 "use client"
 
 import { toast } from "sonner"
+import { useEffect } from "react"
 
 export function WelcomeToast() {
-    const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Sonner' }), 2000));
-
-    toast.promise(promise, {
-      loading: 'Authenticating...',
-      success: 'Welcome 👋 You are now logged in.',
-      error: 'Error',
-    });
+    useEffect(() => {
+        toast.success("Welcome! Please sign in or sign up to continue.");
+    }, []);
+    
     return null
 } 

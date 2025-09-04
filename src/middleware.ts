@@ -5,7 +5,7 @@ export async function middleware(request: NextRequest) {
   // For admin routes, we check for a valid admin session
   if (request.nextUrl.pathname.startsWith('/admin')) {
     // Allow access to admin auth pages
-    if (request.nextUrl.pathname.startsWith('/admin/auth/sign-in')) {
+    if (request.nextUrl.pathname.startsWith('/admin/auth')) {
       return NextResponse.next();
     }
     
@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
       
       if (!sessionCookie) {
         // Redirect to admin login page if no session token
-        const adminSignInUrl = new URL("/admin/auth/sign-in", request.url);
+        const adminSignInUrl = new URL("/admin/auth", request.url);
         adminSignInUrl.searchParams.set("callbackUrl", request.url);
         return NextResponse.redirect(adminSignInUrl);
       }
@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
       // The role verification will be handled in the client-side hook and API routes
     } catch (error) {
       // If there's an error checking the session, redirect to login
-      const adminSignInUrl = new URL("/admin/auth/sign-in", request.url);
+      const adminSignInUrl = new URL("/admin/auth", request.url);
       adminSignInUrl.searchParams.set("callbackUrl", request.url);
       return NextResponse.redirect(adminSignInUrl);
     }

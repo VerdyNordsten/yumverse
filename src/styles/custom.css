@@ -93,3 +93,43 @@ html {
   color: black;
   -webkit-text-fill-color: black;
 }
+
+/* Admin Dashboard Mobile Styles */
+@media (max-width: 768px) {
+  .admin-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .admin-table-container table {
+    min-width: 600px;
+  }
+  
+  .admin-sidebar-mobile {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .admin-header-title {
+    font-size: 1.25rem;
+  }
+  
+  .admin-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .admin-card-header > div:first-child {
+    width: 100%;
+  }
+  
+  .admin-card-header .admin-button-group {
+    width: 100%;
+    justify-content: stretch;
+  }
+  
+  .admin-card-header .admin-button-group > * {
+    flex: 1;
+  }
+}

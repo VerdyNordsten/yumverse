@@ -13,12 +13,13 @@ export async function POST(request: Request) {
       headers: request.headers
     });
     
+    // Type guard to check if session and user exist
     if (!session || !session.user) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
     
-    // Check if this is the same user
-    if (session.user.email !== email) {
+    // Type guard to check if user has email property
+    if (!('email' in session.user) || session.user.email !== email) {
       return NextResponse.json({ error: "Session mismatch" }, { status: 400 });
     }
     

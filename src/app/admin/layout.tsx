@@ -7,5 +7,5 @@ interface AdminLayoutProps {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   // Simple layout that just renders children
   // Authentication logic is handled by middleware and client components
-  return <>{children}</>;
+  return <div className="min-h-screen">{children}</div>;
 }

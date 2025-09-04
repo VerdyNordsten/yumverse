@@ -137,7 +137,13 @@ const floatingIcons = [
 export default function HomePage() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [floatingElements, setFloatingElements] = useState([]);
+  const [floatingElements, setFloatingElements] = useState<Array<{
+    id: number;
+    icon: React.ComponentType<any>;
+    left: number;
+    delay: number;
+    duration: number;
+  }>>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

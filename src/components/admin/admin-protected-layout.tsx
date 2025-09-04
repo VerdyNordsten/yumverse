@@ -18,7 +18,7 @@ export function AdminProtectedLayout({ children }: AdminProtectedLayoutProps) {
   // Redirect unauthenticated users to login
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.replace("/admin/auth/sign-in");
+      router.replace("/admin/auth");
     }
   }, [isLoading, isAuthenticated, router]);
   
@@ -30,7 +30,7 @@ export function AdminProtectedLayout({ children }: AdminProtectedLayoutProps) {
           <Skeleton className="h-full w-full" />
         </div>
         <div className="flex flex-1">
-          <div className="w-64 border-r">
+          <div className="hidden md:block w-64 border-r">
             <Skeleton className="h-full w-full" />
           </div>
           <main className="flex-1 overflow-y-auto p-6">
@@ -58,7 +58,7 @@ export function AdminProtectedLayout({ children }: AdminProtectedLayoutProps) {
       <AdminHeader />
       <div className="flex flex-1">
         <AdminSidebar />
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
         </main>
       </div>

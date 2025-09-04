@@ -5,9 +5,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
+    // Resolve the params promise
+    const { slug } = await params;
+    
     // Fetch the recipe with all related data
     const recipeResult = await db.select({
       id: recipes.id,
@@ -33,7 +36,7 @@ export async function GET(
     .from(recipes)
     .leftJoin(users, eq(recipes.authorId, users.id))
     .where(and(
-      eq(recipes.slug, params.slug),
+      eq(recipes.slug, slug),
       eq(recipes.status, "published")
     ))
     .limit(1);

@@ -1,4 +1,4 @@
-import { AuthCard, AuthLoading } from "@daveyplate/better-auth-ui"
+import { AuthCard } from "@daveyplate/better-auth-ui"
 import { authViewPaths } from "@daveyplate/better-auth-ui/server"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -21,8 +21,6 @@ export default async function AuthPage({
 }) {
     const { pathname } = await params
 
-   
-
     return (
         <main className="container mx-auto flex grow flex-col items-center justify-center gap-4 self-center bg-background py-18 sm:py-22">
             <Link href="/" className="absolute top-6 left-8">
@@ -36,9 +34,7 @@ export default async function AuthPage({
                 </Button>
             </Link>
 
-            <AuthLoading>
-                <WelcomeToast />
-            </AuthLoading>
+            <WelcomeToast />
 
             <AuthCard
                 pathname={pathname}

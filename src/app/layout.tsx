@@ -30,7 +30,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>

@@ -30,7 +30,7 @@ export default function AdminAuthPage() {
   // Show loading state
   if (authLoading) {
     return (
-      <main className="container mx-auto flex grow flex-col items-center justify-center gap-4 self-center bg-background py-18 sm:py-22">
+      <main className="container mx-auto flex grow flex-col items-center justify-center gap-4 self-center bg-background py-8 sm:py-12">
         <div className="w-full max-w-md">
           <div className="text-center mb-6">
             <div className="h-8 w-32 bg-gray-200 rounded animate-pulse mx-auto"></div>
@@ -123,22 +123,23 @@ export default function AdminAuthPage() {
   };
 
   return (
-    <main className="container mx-auto flex grow flex-col items-center justify-center gap-4 self-center bg-background py-18 sm:py-22">
-      <Link href="/" className="absolute top-6 left-8">
+    <main className="container mx-auto flex grow flex-col items-center justify-center gap-4 self-center bg-background py-8 sm:py-12 px-4">
+      <Link href="/" className="absolute top-4 left-4">
         <Button
           variant="outline"
           className="hover:bg-secondary hover:text-secondary-foreground"
           size="sm"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Site
+          <span className="hidden sm:inline">Back to Site</span>
+          <span className="sm:hidden">Back</span>
         </Button>
       </Link>
 
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold">Admin Login</h1>
-          <p className="text-muted-foreground">Access the administration panel</p>
+          <p className="text-muted-foreground text-sm">Access the administration panel</p>
         </div>
         
         <Card>
@@ -201,7 +202,7 @@ export default function AdminAuthPage() {
           </CardFooter>
         </Card>
 
-        <div className="text-center text-muted-foreground text-sm mt-4">
+        <div className="text-center text-muted-foreground text-xs mt-4">
           <p>
             Only authorized administrators can access this area.
           </p>
