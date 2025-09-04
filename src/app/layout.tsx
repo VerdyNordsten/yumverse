@@ -4,25 +4,37 @@ import "@/styles/globals.css"
 import { Navbar } from "@/components/layout/navbar"
 import { FooterSection } from "@/components/layout/sections/footer"
 
+import { Inter as FontSans } from "next/font/google";
+import "../styles/globals.css";
+import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
 export default function RootLayout({
-    children
+  children,
 }: Readonly<{
-    children: ReactNode
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en" suppressHydrationWarning>
-            <head>
-                <script
-                    async
-                    src="/seline.js"
-                    data-token="24cc7b65ecf3469"
-                />
-            </head>
-            <body className="flex min-h-svh flex-col antialiased">
-                <Providers>{children}</Providers>
-            </body>
-        </html>
-    )
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
 }
 
 export function AppLayout({

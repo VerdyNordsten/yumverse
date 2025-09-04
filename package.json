@@ -11,11 +11,19 @@
         "studio": "drizzle-kit studio",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
-        "db:seed": "tsx src/scripts/seed.ts"
+        "db:reset": "tsx src/scripts/reset-database.ts",
+        "db:seed": "tsx src/scripts/seed.ts",
+        "db:create-admin": "tsx src/scripts/create-admin.ts",
+        "db:setup-admin-auth": "tsx src/scripts/setup-admin-auth.ts",
+        "db:update-roles": "tsx src/scripts/update-user-roles.ts",
+        "db:reset-admin-password": "tsx src/scripts/reset-admin-password.ts",
+        "db:list-users": "tsx src/scripts/list-users.ts",
+        "db:verify-admin-password": "tsx src/scripts/verify-admin-password.ts"
     },
     "dependencies": {
         "@daveyplate/better-auth-ui": "^1.7.4",
         "@hookform/resolvers": "^5.1.1",
+        "@node-rs/argon2": "^2.0.2",
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-avatar": "^1.1.10",
         "@radix-ui/react-dialog": "^1.1.15",
@@ -29,7 +37,9 @@
         "@radix-ui/react-tabs": "^1.1.12",
         "@radix-ui/react-tooltip": "^1.2.7",
         "@remixicon/react": "^4.6.0",
+        "@types/uuid": "^10.0.0",
         "@uploadthing/react": "^7.3.3",
+        "@vercel/analytics": "^1.5.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "drizzle-orm": "^0.44.2",
@@ -48,6 +58,7 @@
         "resend": "^6.0.2",
         "sonner": "^2.0.5",
         "tailwind-merge": "^3.3.1",
+        "uuid": "^11.1.0",
         "zod": "^4.0.5"
     },
     "devDependencies": {

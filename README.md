@@ -55,7 +55,12 @@ A modern recipe sharing platform built with Next.js, Drizzle ORM, and PostgreSQL
    pnpm db:seed
    ```
 
-6. Start the development server:
+6. Create an admin user:
+   ```bash
+   pnpm db:create-admin
+   ```
+
+7. Start the development server:
    ```bash
    pnpm dev
    ```
@@ -115,12 +120,59 @@ The app uses Better Auth for authentication with two user roles:
 
 4. Visit `http://localhost:3000/auth/sign-up` to create your first account
 
+### Admin Setup
+
+To create an admin user, you can use one of the following methods:
+
+1. Using the create-admin script:
+   ```bash
+   pnpm db:create-admin
+   ```
+   
+   This will create an admin user with the following default credentials:
+   - Email: admin@example.com
+   - Password: admin123
+   - Name: Admin User
+   
+   You can customize these by setting the following environment variables:
+   ```env
+   ADMIN_EMAIL=your-admin-email@example.com
+   ADMIN_PASSWORD=your-secure-password
+   ADMIN_NAME=Your Admin Name
+   ```
+
+2. Using the update-roles script:
+   ```bash
+   pnpm db:update-roles
+   ```
+   
+   This will ensure that alice@example.com is an admin and bob@example.com and carol@example.com are regular users.
+
+3. Resetting the admin password:
+   ```bash
+   pnpm db:reset-admin-password
+   ```
+   
+   This will reset the password for alice@example.com to "admin123".
+
+### Accessing the Admin Dashboard
+
+Admin users can access the admin dashboard at:
+- Login: `/admin/auth/signin`
+- Dashboard: `/admin/dashboard`
+
+Use one of these sets of credentials:
+1. Email: alice@example.com, Password: admin123 (created during seeding and updated to admin role)
+2. Email: admin@example.com, Password: admin123 (created with the create-admin script)
+
+Regular users cannot access the admin dashboard and will be redirected to the main site.
+
 ### Protected Routes
 
 The following routes require authentication:
 - `/submit` - Submit a new recipe
 - `/recipes/mine` - View your recipes, favorites, and collections
-- `/dashboard/*` - Admin dashboard (for admin users only)
+- `/admin/*` - Admin dashboard (for admin users only)
 
 ## Development Workflow
 
