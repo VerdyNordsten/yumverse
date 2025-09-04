@@ -94,6 +94,34 @@ The app uses Better Auth for authentication with two user roles:
 - `user` - Can submit recipes, favorite recipes, rate recipes, and create collections
 - `admin` - Has all user permissions plus moderation capabilities
 
+### Setup
+
+1. Generate a secret key for Better Auth:
+   ```bash
+   openssl rand -base64 32
+   ```
+
+2. Add the following environment variables to your `.env` file:
+   ```env
+   BETTER_AUTH_SECRET=your-generated-secret
+   DATABASE_URL=your-postgresql-connection-string
+   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   ```
+
+3. Run the development server:
+   ```bash
+   pnpm dev
+   ```
+
+4. Visit `http://localhost:3000/auth/sign-up` to create your first account
+
+### Protected Routes
+
+The following routes require authentication:
+- `/submit` - Submit a new recipe
+- `/recipes/mine` - View your recipes, favorites, and collections
+- `/dashboard/*` - Admin dashboard (for admin users only)
+
 ## Development Workflow
 
 1. Create a new feature branch

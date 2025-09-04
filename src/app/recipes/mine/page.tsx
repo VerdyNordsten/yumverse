@@ -1,3 +1,5 @@
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 import { RecipeGrid } from "@/components/recipe/recipe-grid";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -72,7 +74,18 @@ const mockCollections = [
   }
 ];
 
-export default function UserRecipesPage() {
+export default async function UserRecipesPage() {
+  const data = await auth.api.getSession({
+    headers: {
+      cookie: ""
+    }
+  })
+  
+  // Redirect to login if not authenticated
+  if (!data?.session) {
+    redirect("/auth/sign-in?redirectTo=/recipes/mine")
+  }
+
   return (
     <div className="container py-8">
       <div className="mb-8 flex items-center justify-between">

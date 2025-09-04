@@ -12,6 +12,7 @@ export const users = pgTable("users", {
     emailVerified: boolean("email_verified")
         .$defaultFn(() => false)
         .notNull(),
+    passwordHash: text("password_hash"),
     image: text("image"),
     avatar: text("avatar"),
     avatarUrl: text("avatar_url"),

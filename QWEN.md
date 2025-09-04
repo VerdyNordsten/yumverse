@@ -73,14 +73,14 @@ I want you to make it **more unique, playful, and food-themed**, while keeping i
   - Submit Recipe
   - Meal Planner
   - Blog
-- Add Newsletter: “🍴 Get a recipe in your inbox every day”.
+- Add Newsletter: "🍴 Get a recipe in your inbox every day".
 - Add Social Feed preview (Instagram/TikTok of food images).
 - Keep legal links small at the bottom.
 
 ====================
 ✨ Extra Features
 ====================
-- 🎲 “I’m Hungry” button → random recipe generator.
+- 🎲 "I'm Hungry" button → random recipe generator.
 - 📅 Meal Planner drag & drop → user drags recipe card into calendar.
 - 📷 Community Photos → users upload photos of their cooked recipes under each recipe page.
 - 🏆 Gamification → badges (👩‍🍳 Beginner, 🧑‍🍳 Chef Master).
@@ -106,4 +106,4 @@ I want you to make it **more unique, playful, and food-themed**, while keeping i
 ====================
 - Return updated Next.js + Tailwind + shadcn code for all the above sections.  
 - Include necessary Tailwind config updates (colors, font sizes).  
-- Use Drizzle ORM queries only if needed for demoing recipes/categories.  
+- Use Drizzle ORM queries only if needed for demoing recipes/categories.
