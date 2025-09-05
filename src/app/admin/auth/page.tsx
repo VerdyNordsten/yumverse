@@ -64,21 +64,29 @@ export default function AdminAuthPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!email.trim() || !password.trim()) {
+      toast.error("Please enter both email and password");
+      return;
+    }
+    
     setIsSubmitting(true);
 
     try {
       const { data, error } = await authClient.signIn.email({
-        email,
-        password,
+        email: email.trim(),
+        password: password.trim(),
         fetchOptions: {
           onError: (ctx) => {
+            // Only show toast here, not in the catch block
             toast.error(ctx.error.message || "Invalid credentials");
           }
         }
       });
       
       if (error) {
-        toast.error(error.message || "Invalid credentials");
+        // Don't show toast here since it's already shown in onError
         return;
       }
       
@@ -89,7 +97,7 @@ export default function AdminAuthPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ email: email.trim() })
         });
         
         if (!response.ok) {
@@ -116,7 +124,7 @@ export default function AdminAuthPage() {
         toast.error("Failed to verify admin privileges");
       }
     } catch (error) {
-      toast.error("An error occurred during login");
+      // Don't show toast here since it's already shown in onError
     } finally {
       setIsSubmitting(false);
     }
@@ -193,13 +201,13 @@ export default function AdminAuthPage() {
                   </div>
                 </div>
               </div>
+              <CardFooter className="px-0 pb-0 pt-6">
+                <Button className="w-full" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Signing in..." : "Sign In"}
+                </Button>
+              </CardFooter>
             </form>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full" onClick={handleSubmit} disabled={isSubmitting}>
-              {isSubmitting ? "Signing in..." : "Sign In"}
-            </Button>
-          </CardFooter>
         </Card>
 
         <div className="text-center text-muted-foreground text-xs mt-4">

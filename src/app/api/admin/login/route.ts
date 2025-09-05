@@ -6,8 +6,6 @@ import { eq } from "drizzle-orm";
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json();
-    
     // Get the current session
     const session = await auth.api.getSession({
       headers: request.headers
@@ -18,12 +16,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
     
-    // Type guard to check if user has email property
-    if (!('email' in session.user) || session.user.email !== email) {
-      return NextResponse.json({ error: "Session mismatch" }, { status: 400 });
-    }
-    
     // Check if the user has admin role
+    // We can trust the session user ID since it's verified by better-auth
     const user = await db.query.users.findFirst({
       where: eq(users.id, session.user.id)
     });

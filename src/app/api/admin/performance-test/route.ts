@@ -1,12 +1,14 @@
-import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
 import { db } from "@/database/db";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
-    // Get the session using better-auth
+    const startTime = performance.now();
+    
+    // Get the session
     const session = await auth.api.getSession({
       headers: request.headers
     });
@@ -15,8 +17,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
     
-    // Check if the user has admin role
-    // Use the session user ID directly since it's verified by better-auth
+    // Check admin role
     const user = await db.query.users.findFirst({
       where: eq(users.id, session.user.id)
     });
@@ -29,15 +30,21 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Access denied. Admin privileges required." }, { status: 403 });
     }
     
-    // Return user information
+    const endTime = performance.now();
+    const duration = endTime - startTime;
+    
     return NextResponse.json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role
+      success: true,
+      duration: duration,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
     });
   } catch (error) {
-    console.error("Failed to get admin user info:", error);
+    console.error("Admin verification error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

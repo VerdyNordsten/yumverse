@@ -16,7 +16,7 @@ export function useAdminAuth() {
         const { data: session } = await authClient.getSession();
         
         // Check if user is authenticated
-        if (!session) {
+        if (!session || !session.user) {
           setIsAuthenticated(false);
           setIsLoading(false);
           return;

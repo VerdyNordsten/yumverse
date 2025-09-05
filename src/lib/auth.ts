@@ -14,6 +14,11 @@ const createDatabaseAdapter = () => {
 
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL,
+      // Add connection pooling optimizations
+      max: 20,
+      min: 5,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 2000,
     })
 
     return drizzleAdapter(drizzle(pool, { schema }), {
@@ -48,5 +53,15 @@ export const auth = betterAuth({
             clientSecret: process.env.TWITTER_CLIENT_SECRET || ""
         }
     },
-    plugins: []
+    plugins: [],
+    // Add session optimization settings
+    session: {
+        expiresIn: 60 * 60 * 24 * 7, // 1 week
+        updateAge: 60 * 60 * 24, // 1 day
+    },
+    // Add rate limiting to prevent abuse
+    rateLimit: {
+        window: 60, // 1 minute
+        maxRequests: 10,
+    }
 })
